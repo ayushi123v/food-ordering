@@ -34,7 +34,7 @@ const FrontPage = () => {
             </p>
 
             <div className="flex flex-wrap gap-4 mb-12">
-              <Link to="/menu/pizza">
+              <Link to="/customer/vendors">
                 <Button size="lg" className="btn-hero group">
                   Start Ordering
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -131,7 +131,7 @@ const FrontPage = () => {
             </div> */}
 
             <div className="mt-12">
-              <Link to="/menu/pizza">
+              <Link to="/customer/vendors">
                 <Button size="lg" className="btn-hero">
                   Explore Menu
                   <ArrowRight className="ml-2 h-5 w-5" />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Minus, Plus, Trash2, ArrowLeft, ShoppingBag } from 'lucide-react';
 import { toast } from 'sonner';
 import Navbar from '../components/Navbar';
@@ -9,6 +9,7 @@ import { Button } from '../components/ui/button';
 
 
 const CartPage = () => {
+  const navigate = useNavigate();
   const { cart, updateQuantity, removeFromCart, getTotalPrice, clearCart } = useCart();
   const total = getTotalPrice();
 
@@ -17,8 +18,19 @@ const CartPage = () => {
       toast.error('Your cart is empty');
       return;
     }
-    toast.success('Order placed successfully!');
+    
+    // Prepare order data
+    const orderData = {
+      items: cart,
+      total: total,
+      itemCount: cart.length,
+      orderDate: new Date().toISOString(),
+    };
+    
+    // Clear cart and navigate to checkout success page
     clearCart();
+    toast.success('Order placed successfully!');
+    navigate('/checkout-success', { state: { orderData } });
   };
 
   return (
@@ -118,7 +130,7 @@ const CartPage = () => {
                   <div className="flex space-x-4">
                     <Button
                       onClick={handleCheckout}
-                      className="flex-1 btn-hero"
+                      className="flex-1 btn-hero rounded-full"
                       size="lg"
                     >
                       Checkout
@@ -127,7 +139,9 @@ const CartPage = () => {
                       onClick={clearCart}
                       variant="outline"
                       size="lg"
+                      className="border-2 border-destructive text-destructive hover:bg-destructive hover:text-white transition-all duration-300 font-semibold shadow-sm hover:shadow-md rounded-full px-8"
                     >
+                      <Trash2 className="h-4 w-4 mr-2" />
                       Clear Cart
                     </Button>
                   </div>

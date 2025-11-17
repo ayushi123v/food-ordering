@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   ChefHat,
@@ -8,9 +9,46 @@ import {
   User,
   Phone,
   DollarSign,
+  Image,
 } from "lucide-react";
+import { toast } from "sonner";
+import { vendorSignup, saveAuthData } from "@/services/api";
 
 const VendorSignUp = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: "",
+    shopName: "",
+    email: "",
+    phone: "",
+    address: "",
+    deliveryPrice: 0,
+    logo: "",
+    password: "",
+  });
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!formData.name || !formData.shopName || !formData.email || !formData.password) {
+      toast.error("Please fill in required fields (Name, Shop Name, Email, Password)");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await vendorSignup(formData);
+      saveAuthData(response.token, response.vendor, "vendor");
+      toast.success("Vendor account created successfully!");
+      navigate("/vendor/dashboard");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Signup failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-400 via-red-400 to-red-600 p-4">
       <motion.div
@@ -37,14 +75,17 @@ const VendorSignUp = () => {
           <p className="text-white/80 text-sm">Start selling on FoodHub</p>
         </div>
 
-        <div className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           {/* Owner Name */}
           <div className="relative">
             <User className="absolute left-3 top-3 text-white/70 h-5 w-5" />
             <input
               type="text"
               placeholder="Owner Name"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               className="w-full bg-white/20 text-white placeholder-white/70 py-3 pl-11 pr-3 rounded-xl border border-white/30 focus:ring-2 focus:ring-orange-300 outline-none"
+              disabled={loading}
             />
           </div>
 
@@ -54,7 +95,10 @@ const VendorSignUp = () => {
             <input
               type="text"
               placeholder="Restaurant / Shop Name"
+              value={formData.shopName}
+              onChange={(e) => setFormData({ ...formData, shopName: e.target.value })}
               className="w-full bg-white/20 text-white placeholder-white/70 py-3 pl-11 pr-3 rounded-xl border border-white/30 focus:ring-2 focus:ring-orange-300 outline-none"
+              disabled={loading}
             />
           </div>
 
@@ -64,7 +108,10 @@ const VendorSignUp = () => {
             <input
               type="email"
               placeholder="Business Email"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               className="w-full bg-white/20 text-white placeholder-white/70 py-3 pl-11 pr-3 rounded-xl border border-white/30 focus:ring-2 focus:ring-orange-300 outline-none"
+              disabled={loading}
             />
           </div>
 
@@ -74,7 +121,10 @@ const VendorSignUp = () => {
             <input
               type="text"
               placeholder="Phone Number (optional)"
+              value={formData.phone}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               className="w-full bg-white/20 text-white placeholder-white/70 py-3 pl-11 pr-3 rounded-xl border border-white/30 focus:ring-2 focus:ring-orange-300 outline-none"
+              disabled={loading}
             />
           </div>
 
@@ -84,7 +134,23 @@ const VendorSignUp = () => {
             <input
               type="text"
               placeholder="Business Address (optional)"
+              value={formData.address}
+              onChange={(e) => setFormData({ ...formData, address: e.target.value })}
               className="w-full bg-white/20 text-white placeholder-white/70 py-3 pl-11 pr-3 rounded-xl border border-white/30 focus:ring-2 focus:ring-orange-300 outline-none"
+              disabled={loading}
+            />
+          </div>
+
+          {/* Logo URL */}
+          <div className="relative">
+            <Image className="absolute left-3 top-3 text-white/70 h-5 w-5" />
+            <input
+              type="url"
+              placeholder="Logo Image URL (optional)"
+              value={formData.logo}
+              onChange={(e) => setFormData({ ...formData, logo: e.target.value })}
+              className="w-full bg-white/20 text-white placeholder-white/70 py-3 pl-11 pr-3 rounded-xl border border-white/30 focus:ring-2 focus:ring-orange-300 outline-none"
+              disabled={loading}
             />
           </div>
 
@@ -96,8 +162,10 @@ const VendorSignUp = () => {
             <input
               type="number"
               placeholder="Delivery Charge (optional)"
-              defaultValue={0}
+              value={formData.deliveryPrice}
+              onChange={(e) => setFormData({ ...formData, deliveryPrice: parseFloat(e.target.value) || 0 })}
               className="w-full bg-white/20 text-white placeholder-white/70 py-3 pl-11 pr-3 rounded-xl border border-white/30 focus:ring-2 focus:ring-orange-300 outline-none"
+              disabled={loading}
             />
           </div>
 
@@ -107,18 +175,23 @@ const VendorSignUp = () => {
             <input
               type="password"
               placeholder="Password"
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               className="w-full bg-white/20 text-white placeholder-white/70 py-3 pl-11 pr-3 rounded-xl border border-white/30 focus:ring-2 focus:ring-orange-300 outline-none"
+              disabled={loading}
             />
           </div>
 
           <motion.button
+            type="submit"
             whileTap={{ scale: 0.95 }}
             whileHover={{ scale: 1.04 }}
-            className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all"
+            disabled={loading}
+            className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Create Vendor Account
+            {loading ? "Creating Account..." : "Create Vendor Account"}
           </motion.button>
-        </div>
+        </form>
 
         <div className="text-center mt-4 text-white/80 text-sm">
           Already have a vendor account?{" "}

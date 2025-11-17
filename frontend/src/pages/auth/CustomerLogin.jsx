@@ -1,8 +1,39 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { User, Mail, Lock } from "lucide-react";
+import { toast } from "sonner";
+import { customerLogin, saveAuthData } from "@/services/api";
 
 const CustomerLogin = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!formData.email || !formData.password) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await customerLogin(formData);
+      saveAuthData(response.token, response.user, "customer");
+      toast.success("Login successful!");
+      navigate("/customer/vendors");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Login failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-400 via-red-400 to-red-600 p-4">
       <motion.div
@@ -24,14 +55,17 @@ const CustomerLogin = () => {
           <p className="text-white/80 text-sm">Login to order delicious food</p>
         </div>
 
-        <div className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
 
           <div className="relative">
             <Mail className="absolute left-3 top-3 text-white/70 h-5 w-5" />
             <input
               type="email"
               placeholder="Email"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               className="w-full bg-white/20 text-white placeholder-white/70 py-3 pl-11 pr-3 rounded-xl border border-white/30 focus:ring-2 focus:ring-orange-300 outline-none"
+              disabled={loading}
             />
           </div>
 
@@ -40,18 +74,23 @@ const CustomerLogin = () => {
             <input
               type="password"
               placeholder="Password"
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               className="w-full bg-white/20 text-white placeholder-white/70 py-3 pl-11 pr-3 rounded-xl border border-white/30 focus:ring-2 focus:ring-orange-300 outline-none"
+              disabled={loading}
             />
           </div>
 
           <motion.button
+            type="submit"
             whileTap={{ scale: .95 }}
             whileHover={{ scale: 1.04 }}
-            className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all"
+            disabled={loading}
+            className="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Login
+            {loading ? "Logging in..." : "Login"}
           </motion.button>
-        </div>
+        </form>
 
         <div className="text-center mt-4 text-white/80 text-sm">
           Not registered?{" "}
