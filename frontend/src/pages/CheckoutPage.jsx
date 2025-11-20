@@ -160,20 +160,20 @@ const CheckoutPage = () => {
             >
               <Button
                 onClick={() => navigate('/customer/orders')}
-                className="w-full btn-hero rounded-full"
+                className="w-full btn-hero rounded-full flex items-center gap-2"
                 size="lg"
               >
-                <Package className="h-4 w-4 mr-2" />
-                Track Your Order
+                <Package className="h-4 w-4 flex-shrink-0" />
+                <span>Track Your Order</span>
               </Button>
               <Button
                 onClick={() => navigate('/')}
                 variant="outline"
-                className="w-full rounded-full"
+                className="w-full rounded-full flex items-center gap-2"
                 size="lg"
               >
-                <Home className="h-4 w-4 mr-2" />
-                Back to Home
+                <Home className="h-4 w-4 flex-shrink-0" />
+                <span>Back to Home</span>
               </Button>
             </motion.div>
 

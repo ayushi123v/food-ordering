@@ -206,16 +206,21 @@ const RestaurantProfile = () => {
 
             {/* Submit Button */}
             <div className="flex justify-end pt-4">
-              <Button type="submit" disabled={saving} size="lg">
+              <Button 
+                type="submit" 
+                disabled={saving} 
+                size="lg"
+                className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-2"
+              >
                 {saving ? (
                   <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Saving...
+                    <Loader2 className="h-5 w-5 flex-shrink-0 animate-spin" />
+                    <span>Saving...</span>
                   </>
                 ) : (
                   <>
-                    <Save className="mr-2 h-4 w-4" />
-                    Save Changes
+                    <Save className="h-5 w-5 flex-shrink-0" />
+                    <span>Save Changes</span>
                   </>
                 )}
               </Button>

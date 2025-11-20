@@ -190,10 +190,10 @@ const VendorMenu = () => {
                       </div>
                       <Button 
                         onClick={() => handleAddToCart(item)}
-                        className="flex-1"
+                        className="flex-1 flex items-center justify-center gap-2"
                       >
-                        <ShoppingCart className="mr-2 h-4 w-4" />
-                        Add to Cart
+                        <ShoppingCart className="h-4 w-4 flex-shrink-0" />
+                        <span>Add to Cart</span>
                       </Button>
                     </>
                   )}

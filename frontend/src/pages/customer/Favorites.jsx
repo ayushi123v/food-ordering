@@ -110,11 +110,11 @@ const Favorites = () => {
                 </div>
 
                 <Button 
-                  className="w-full"
+                  className="w-full flex items-center gap-2"
                   onClick={() => addToCart(item)}
                 >
-                  <ShoppingCart className="h-4 w-4 mr-2" />
-                  Add to Cart
+                  <ShoppingCart className="h-4 w-4 flex-shrink-0" />
+                  <span>Add to Cart</span>
                 </Button>
               </CardContent>
             </Card>

@@ -71,6 +71,11 @@ const CartPage = () => {
     }
   };
 
+  const handleClearCart = () => {
+    clearCart();
+    toast.success('Cart cleared');
+  };
+
   // Determine the correct "Continue Shopping" link
   const continueShoppingLink = isLoggedIn && userRole === 'customer' 
     ? '/customer/vendors' 
@@ -82,9 +87,9 @@ const CartPage = () => {
       <div className="flex items-center justify-between mb-8 animate-fade-in">
         <h1 className="text-4xl font-display font-bold">Shopping Cart</h1>
         <Link to={continueShoppingLink}>
-          <Button variant="outline">
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Continue Shopping
+          <Button variant="outline" className="flex items-center gap-2">
+            <ArrowLeft className="h-4 w-4 flex-shrink-0" />
+            <span>Continue Shopping</span>
           </Button>
         </Link>
       </div>
@@ -195,14 +200,14 @@ const CartPage = () => {
                 )}
               </Button>
               <Button
-                onClick={clearCart}
+                onClick={handleClearCart}
                 variant="outline"
                 size="lg"
                 disabled={placing}
-                className="border-2 border-destructive text-destructive hover:bg-destructive hover:text-white transition-all duration-300 font-semibold shadow-sm hover:shadow-md rounded-full px-8"
+                className="border-2 border-destructive text-destructive hover:bg-destructive hover:text-white transition-all duration-300 font-semibold shadow-sm hover:shadow-md rounded-full px-8 flex items-center gap-2"
               >
-                <Trash2 className="h-4 w-4 mr-2" />
-                Clear Cart
+                <Trash2 className="h-4 w-4 flex-shrink-0" />
+                <span>Clear Cart</span>
               </Button>
             </div>
           </div>

@@ -88,9 +88,9 @@ const MyOrders = () => {
               <CardTitle className="text-lg">{order.vendor?.shopName || 'Restaurant'}</CardTitle>
               <CardDescription>Order #{orderId}</CardDescription>
             </div>
-            <Badge variant={config.badge}>
-              <StatusIcon className="h-3 w-3 mr-1" />
-              {config.text}
+            <Badge variant={config.badge} className="flex items-center gap-1 flex-shrink-0">
+              <StatusIcon className="h-3 w-3" />
+              <span>{config.text}</span>
             </Badge>
           </div>
         </CardHeader>
@@ -113,9 +113,10 @@ const MyOrders = () => {
               variant="outline" 
               size="sm"
               onClick={() => viewOrderDetails(order)}
+              className="flex items-center gap-1.5"
             >
-              <Eye className="h-4 w-4 mr-1" />
-              View Details
+              <Eye className="h-4 w-4 flex-shrink-0" />
+              <span>View Details</span>
             </Button>
           </div>
         </CardContent>

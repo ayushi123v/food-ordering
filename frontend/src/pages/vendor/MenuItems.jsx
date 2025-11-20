@@ -185,9 +185,9 @@ const MenuItems = () => {
           <h1 className="text-3xl font-bold text-foreground">Menu Items</h1>
           <p className="text-muted-foreground">Manage your restaurant menu</p>
         </div>
-        <Button onClick={handleAddNew}>
-          <Plus className="h-4 w-4 mr-2" />
-          Add Item
+        <Button onClick={handleAddNew} className="flex items-center gap-2">
+          <Plus className="h-4 w-4 flex-shrink-0" />
+          <span>Add Item</span>
         </Button>
       </div>
 
@@ -195,9 +195,9 @@ const MenuItems = () => {
         {menuItems.length === 0 ? (
           <div className="col-span-full text-center py-12">
             <p className="text-muted-foreground mb-4">No menu items yet. Add your first item!</p>
-            <Button onClick={handleAddNew}>
-              <Plus className="h-4 w-4 mr-2" />
-              Add First Item
+            <Button onClick={handleAddNew} className="inline-flex items-center justify-center gap-2">
+              <Plus className="h-4 w-4 flex-shrink-0" />
+              <span>Add First Item</span>
             </Button>
           </div>
         ) : (
@@ -253,11 +253,11 @@ const MenuItems = () => {
                   <Button 
                     variant="outline" 
                     size="sm"
-                    className="flex-1"
+                    className="flex-1 flex items-center gap-1.5"
                     onClick={() => handleEdit(item)}
                   >
-                    <Edit className="h-4 w-4 mr-1" />
-                    Edit
+                    <Edit className="h-4 w-4 flex-shrink-0" />
+                    <span>Edit</span>
                   </Button>
                   <Button 
                     variant="outline" 
@@ -380,11 +380,11 @@ const MenuItems = () => {
               >
                 {saveLoading ? (
                   <>
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    Saving...
+                    <Loader2 className="h-4 w-4 flex-shrink-0 animate-spin" />
+                    <span className="ml-2">Saving...</span>
                   </>
                 ) : (
-                  <>{editingItem ? 'Update' : 'Add'} Item</>
+                  <span>{editingItem ? 'Update' : 'Add'} Item</span>
                 )}
               </Button>
             </div>

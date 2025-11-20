@@ -51,9 +51,9 @@ const FrontPage = () => {
 
             <div className="flex flex-wrap gap-4 mb-12">
               <Link to="/browse/vendors">
-                <Button size="lg" className="btn-hero group">
-                  Start Ordering
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                <Button size="lg" className="btn-hero group flex items-center gap-2">
+                  <span>Start Ordering</span>
+                  <ArrowRight className="h-5 w-5 flex-shrink-0 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
               <Link to="/auth/role">
@@ -63,8 +63,8 @@ const FrontPage = () => {
                hover:bg-white/25 hover:border-white/60 hover:scale-[1.04] transition-all duration-300 
                font-semibold flex items-center gap-2"
                 >
-                  <UserPlus className="h-4 w-4" />
-                  Sign Up
+                  <UserPlus className="h-5 w-5 flex-shrink-0" />
+                  <span>Sign Up</span>
                 </Button>
               </Link>
             </div>
@@ -149,8 +149,8 @@ const FrontPage = () => {
             <div className="mt-12">
               <Link to="/customer/vendors">
                 <Button size="lg" className="btn-hero">
-                  Explore Menu
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <span>Explore Menu</span>
+                  <ArrowRight className="h-5 w-5 flex-shrink-0" />
                 </Button>
               </Link>
             </div>

@@ -60,9 +60,9 @@ const Settings = () => {
           <Separator />
 
           <div className="space-y-2">
-            <Label className="flex items-center">
-              <Globe className="h-4 w-4 mr-2" />
-              Language
+            <Label className="flex items-center gap-2">
+              <Globe className="h-4 w-4 flex-shrink-0" />
+              <span>Language</span>
             </Label>
             <Select value={language} onValueChange={setLanguage}>
               <SelectTrigger>
@@ -120,9 +120,9 @@ const Settings = () => {
           <Separator />
 
           <div className="space-y-2">
-            <Button variant="outline" className="w-full justify-start">
-              <Lock className="h-4 w-4 mr-2" />
-              Change Password
+            <Button variant="outline" className="w-full flex items-center justify-start gap-2">
+              <Lock className="h-4 w-4 flex-shrink-0" />
+              <span>Change Password</span>
             </Button>
           </div>
         </CardContent>

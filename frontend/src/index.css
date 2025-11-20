@@ -119,7 +119,7 @@ All colors MUST be HSL.
 
 @layer components {
   .btn-hero {
-    @apply bg-gradient-to-r from-primary to-secondary text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105;
+    @apply bg-gradient-to-r from-primary to-secondary text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 inline-flex items-center justify-center gap-2;
   }
 
   .card-food {

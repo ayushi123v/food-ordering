@@ -180,14 +180,14 @@ const MyProfile = () => {
               <Button variant="outline" type="button" onClick={fetchProfile}>
                 Cancel
               </Button>
-              <Button onClick={handleSave} disabled={saving}>
+              <Button onClick={handleSave} disabled={saving} className="flex items-center gap-2">
                 {saving ? (
                   <>
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                    Saving...
+                    <Loader2 className="h-4 w-4 flex-shrink-0 animate-spin" />
+                    <span>Saving...</span>
                   </>
                 ) : (
-                  'Save Changes'
+                  <span>Save Changes</span>
                 )}
               </Button>
             </div>

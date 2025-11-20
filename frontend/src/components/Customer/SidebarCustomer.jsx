@@ -236,11 +236,11 @@ const SidebarCustomer = ({ isOpen, onClose }) => {
         <div className="p-4 border-t border-border">
           <Button
             variant="destructive"
-            className="w-full justify-start"
+            className="w-full flex items-center justify-start gap-2"
             onClick={handleLogout}
           >
-            <LogOut className="h-5 w-5 mr-2" />
-            Logout
+            <LogOut className="h-5 w-5 flex-shrink-0" />
+            <span>Logout</span>
           </Button>
         </div>
       </aside>

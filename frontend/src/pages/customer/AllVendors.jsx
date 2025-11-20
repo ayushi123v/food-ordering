@@ -92,9 +92,9 @@ const AllVendors = () => {
 
               <CardFooter>
                 <Link to={`/customer/vendor/${vendor._id}`} className="w-full">
-                  <Button className="w-full group/btn">
-                    View Menu
-                    <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                  <Button className="w-full group/btn flex items-center justify-center gap-2">
+                    <span>View Menu</span>
+                    <ArrowRight className="h-4 w-4 flex-shrink-0 group-hover/btn:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
               </CardFooter>

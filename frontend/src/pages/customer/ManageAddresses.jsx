@@ -140,9 +140,9 @@ const ManageAddresses = () => {
           <h1 className="text-3xl font-bold text-foreground">Manage Addresses</h1>
           <p className="text-muted-foreground">Add and manage your delivery addresses</p>
         </div>
-        <Button onClick={handleAddNew}>
-          <Plus className="h-4 w-4 mr-2" />
-          Add Address
+        <Button onClick={handleAddNew} className="flex items-center gap-2">
+          <Plus className="h-4 w-4 flex-shrink-0" />
+          <span>Add Address</span>
         </Button>
       </div>
 
@@ -182,18 +182,20 @@ const ManageAddresses = () => {
                     variant="outline" 
                     size="sm"
                     onClick={() => handleEdit(address)}
+                    className="flex items-center gap-1.5"
                   >
-                    <Edit className="h-4 w-4 mr-1" />
-                    Edit
+                    <Edit className="h-4 w-4 flex-shrink-0" />
+                    <span>Edit</span>
                   </Button>
                   <Button 
                     variant="outline" 
                     size="sm"
                     onClick={() => handleDelete(address.id)}
                     disabled={address.isDefault}
+                    className="flex items-center gap-1.5"
                   >
-                    <Trash2 className="h-4 w-4 mr-1" />
-                    Delete
+                    <Trash2 className="h-4 w-4 flex-shrink-0" />
+                    <span>Delete</span>
                   </Button>
                 </div>
               </CardContent>

@@ -52,9 +52,9 @@ const MyWallet = () => {
               <p className="text-4xl font-bold">₹{walletBalance.toFixed(2)}</p>
               <p className="text-white/80 mt-1">Available Balance</p>
             </div>
-            <Button variant="secondary">
-              <Plus className="h-4 w-4 mr-2" />
-              Add Money
+            <Button variant="secondary" className="flex items-center gap-2">
+              <Plus className="h-4 w-4 flex-shrink-0" />
+              <span>Add Money</span>
             </Button>
           </div>
         </CardContent>
@@ -68,9 +68,9 @@ const MyWallet = () => {
               <CardTitle>Payment Methods</CardTitle>
               <CardDescription>Manage your saved payment methods</CardDescription>
             </div>
-            <Button variant="outline">
-              <Plus className="h-4 w-4 mr-2" />
-              Add Card
+            <Button variant="outline" className="flex items-center gap-2">
+              <Plus className="h-4 w-4 flex-shrink-0" />
+              <span>Add Card</span>
             </Button>
           </div>
         </CardHeader>

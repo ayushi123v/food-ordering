@@ -115,9 +115,9 @@ const VendorOrders = () => {
                 {order.customer?.name || 'Customer'} • {order.customer?.phone || 'N/A'}
               </CardDescription>
             </div>
-            <Badge variant={config.badge}>
-              <StatusIcon className="h-3 w-3 mr-1" />
-              {config.text}
+            <Badge variant={config.badge} className="flex items-center gap-1 flex-shrink-0">
+              <StatusIcon className="h-3 w-3" />
+              <span>{config.text}</span>
             </Badge>
           </div>
         </CardHeader>
@@ -140,20 +140,22 @@ const VendorOrders = () => {
               variant="outline" 
               size="sm"
               onClick={() => viewOrderDetails(order)}
+              className="flex items-center gap-1.5"
             >
-              <Eye className="h-4 w-4 mr-1" />
-              View Details
+              <Eye className="h-4 w-4 flex-shrink-0" />
+              <span>View Details</span>
             </Button>
             {config.nextStatus && (
               <Button 
                 size="sm"
                 onClick={() => handleStatusUpdate(order._id, config.nextStatus)}
                 disabled={updating}
+                className="flex items-center gap-1.5"
               >
                 {updating ? (
-                  <Loader2 className="h-4 w-4 mr-1 animate-spin" />
+                  <Loader2 className="h-4 w-4 flex-shrink-0 animate-spin" />
                 ) : null}
-                {config.nextLabel}
+                <span>{config.nextLabel}</span>
               </Button>
             )}
           </div>

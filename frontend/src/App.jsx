@@ -7,9 +7,6 @@ import { CartProvider } from "@/contexts/CartContext";
 import { AuthRoute, PrivateRoute } from "@/components/ProtectedRoute";
 import FrontPage from "./pages/FrontPage";
 import GuestBrowse from "./pages/GuestBrowse";
-import LoginPage from "./pages/LoginPage";
-import SignupPage from "./pages/SignupPage";
-import CategoryPage from "./pages/CategoryPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import CartPage from "./pages/CartPage";
 import NotFound from "./pages/NotFound";
@@ -49,9 +46,6 @@ const App = () => {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<FrontPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/signup" element={<SignupPage />} />
-              <Route path="/menu/:category" element={<CategoryPage />} />
               <Route path="/checkout-success" element={<CheckoutPage />} />
               <Route path="*" element={<NotFound />} />
 
