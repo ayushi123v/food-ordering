@@ -132,10 +132,11 @@ const MyOrders = () => {
       </div>
 
       <Tabs defaultValue="all" className="space-y-4">
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-5">
           <TabsTrigger value="all">All Orders</TabsTrigger>
           <TabsTrigger value="pending">Pending</TabsTrigger>
           <TabsTrigger value="preparing">Preparing</TabsTrigger>
+          <TabsTrigger value="out for delivery">Out for Delivery</TabsTrigger>
           <TabsTrigger value="delivered">Delivered</TabsTrigger>
         </TabsList>
 
@@ -176,6 +177,20 @@ const MyOrders = () => {
             </Card>
           ) : (
             filterOrders('preparing').map(order => (
+              <OrderCard key={order._id} order={order} />
+            ))
+          )}
+        </TabsContent>
+
+        <TabsContent value="out for delivery" className="space-y-4">
+          {filterOrders('out for delivery').length === 0 ? (
+            <Card>
+              <CardContent className="py-8 text-center">
+                <p className="text-muted-foreground">No orders out for delivery</p>
+              </CardContent>
+            </Card>
+          ) : (
+            filterOrders('out for delivery').map(order => (
               <OrderCard key={order._id} order={order} />
             ))
           )}

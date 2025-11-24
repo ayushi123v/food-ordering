@@ -11,6 +11,14 @@ const AllVendors = () => {
   const [vendors, setVendors] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Determine if user is logged in as customer
+  const token = localStorage.getItem('token');
+  const userRole = localStorage.getItem('userRole');
+  const isCustomer = token && userRole === 'customer';
+  
+  // Set the base path for vendor links
+  const basePath = isCustomer ? '/customer' : '/browse';
+
   useEffect(() => {
     fetchVendors();
   }, []);
@@ -91,7 +99,7 @@ const AllVendors = () => {
               </CardContent>
 
               <CardFooter>
-                <Link to={`/customer/vendor/${vendor._id}`} className="w-full">
+                <Link to={`${basePath}/vendor/${vendor._id}`} className="w-full">
                   <Button className="w-full group/btn flex items-center justify-center gap-2">
                     <span>View Menu</span>
                     <ArrowRight className="h-4 w-4 flex-shrink-0 group-hover/btn:translate-x-1 transition-transform" />

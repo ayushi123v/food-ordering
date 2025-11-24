@@ -18,6 +18,14 @@ const VendorMenu = () => {
   const [loading, setLoading] = useState(true);
   const [quantities, setQuantities] = useState({});
 
+  // Determine if user is logged in as customer
+  const token = localStorage.getItem('token');
+  const userRole = localStorage.getItem('userRole');
+  const isCustomer = token && userRole === 'customer';
+  
+  // Set the vendors page path
+  const vendorsPath = isCustomer ? '/customer/vendors' : '/browse/vendors';
+
   useEffect(() => {
     fetchVendorMenu();
   }, [vendorId]);
@@ -79,7 +87,7 @@ const VendorMenu = () => {
     return (
       <div className="text-center py-20">
         <p className="text-xl text-muted-foreground">Vendor not found</p>
-        <Button onClick={() => navigate('/customer/vendors')} className="mt-4">
+        <Button onClick={() => navigate(vendorsPath)} className="mt-4">
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Vendors
         </Button>
@@ -91,7 +99,7 @@ const VendorMenu = () => {
     <div className="space-y-6">
       {/* Header with Back Button */}
       <div className="flex items-center gap-4">
-        <Button variant="ghost" size="icon" onClick={() => navigate('/customer/vendors')}>
+        <Button variant="ghost" size="icon" onClick={() => navigate(vendorsPath)}>
           <ArrowLeft className="h-5 w-5" />
         </Button>
         <div className="flex-1">

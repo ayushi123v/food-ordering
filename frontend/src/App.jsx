@@ -11,7 +11,6 @@ import CheckoutPage from "./pages/CheckoutPage";
 import CartPage from "./pages/CartPage";
 import NotFound from "./pages/NotFound";
 import AuthSelectRole from "./pages/AuthSelectRole";
-import AuthChooseAction from "./pages/AuthChooseAction";
 import CustomerLogin from "./pages/auth/CustomerLogin";
 import CustomerSignUp from "./pages/auth/CustomerSignUp";
 import VendorLogin from "./pages/auth/VendorLogin";
@@ -59,7 +58,6 @@ const App = () => {
 
               {/* Auth Routes - Prevent logged-in users from accessing */}
               <Route path="/auth/role" element={<AuthRoute><AuthSelectRole /></AuthRoute>} />
-              <Route path="/auth/:role" element={<AuthRoute><AuthChooseAction /></AuthRoute>} />
               <Route path="/login/customer" element={<AuthRoute><CustomerLogin /></AuthRoute>} />
               <Route path="/signup/customer" element={<AuthRoute><CustomerSignUp /></AuthRoute>} />
               <Route path="/login/vendor" element={<AuthRoute><VendorLogin /></AuthRoute>} />

@@ -9,7 +9,7 @@ const AuthSelectRole = () => {
   const handleSelect = (selectedRole) => {
     setRole(selectedRole);
     setTimeout(() => {
-      navigate(`/auth/${selectedRole}`);
+      navigate(`/login/${selectedRole}`);
     }, 200);
   };
 
